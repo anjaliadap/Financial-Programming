@@ -26,7 +26,7 @@ From inside the `HW1` folder:
 
 `g++ -std=c++23 -Iinclude src/*.cpp -o example_date.exe`
 
-This compiles all the .cpp files and produces an executable named example_date.exe.
+This compiles all the `.cpp` files and produces an executable named `example_date.exe`.
 
 ## Windows-specific note
 Since I’m using a Windows laptop with MSYS2/MinGW, I had to link against an additional experimental library (`libstdc++exp`) in order to use the new C++23 `<print>` header.
