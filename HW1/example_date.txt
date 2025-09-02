@@ -1,0 +1,7 @@
+Option:
+	notional: 1000
+	underlying: SPX
+	is_call: Call
+	strike: 3800
+	expiry: 2022-12-21
+Price: 139270.50707824607

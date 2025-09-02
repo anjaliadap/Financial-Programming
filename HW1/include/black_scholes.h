@@ -1,0 +1,1 @@
+double bs_price_fwd(bool isCall, double K, double T, double F, double sigma);
