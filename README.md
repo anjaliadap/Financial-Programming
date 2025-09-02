@@ -1,4 +1,4 @@
-# Financial Programming Homework
+# Financial Programming 
 
 ## 📂 Project Structure
 To keep the project organized and easy to read, I sorted my files into two main folders:
