@@ -45,8 +45,6 @@ After compilation, run:
 
 The program output will appear directly in the terminal.
 
----
-
 ## 📄 Creating Output as a .txt File
 Sometimes it’s useful to save the program’s output into a file instead of only displaying it in the terminal.  
 You can do this using **output redirection** (`>`).
