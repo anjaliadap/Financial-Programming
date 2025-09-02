@@ -30,7 +30,7 @@ This compiles all the .cpp files and produces an executable named example_date.e
 
 ## Windows-specific note
 
-Since I’m using a Windows laptop with MSYS2/MinGW, I had to link against an additional experimental library (libstdc++exp) in order to use the new C++23 `<print>` header.
+Since I’m using a Windows laptop with MSYS2/MinGW, I had to link against an additional experimental library (`libstdc++exp`) in order to use the new C++23 `<print>` header.
 
 So my compile command is:
 
