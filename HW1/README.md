@@ -60,6 +60,6 @@ After compiling your program, run:
 - To append output to an existing file instead of overwriting, use:
   `./example_date.exe >> example_date.txt`
 
-  You can then open output.txt in any text editor (like Notepad, Visual Studio Code, or within the terminal using `cat output.txt`).
+  You can then open output.txt in any text editor (like Notepad, Visual Studio Code, or within the terminal using `cat example_date.txt`).
 
 
