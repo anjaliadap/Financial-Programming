@@ -1,0 +1,11 @@
+y_1 = 47
+y_2 = 0.0018590641324997689
+y_3 = 31
+y_4 = -1.25
+call = 10
+put = 0
+call = 10
+call = 10
+put = 0,
+bond price (while loop) = 7.038360483374212
+bond price (for loop) = 7.038360483374212
