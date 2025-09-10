@@ -62,8 +62,8 @@ int main() {
     call2 = max((S - K), 0.0);
     put2 = max((K - S), 0.0);
 
-    println("call = {}", call2, "\n");
-    println("put = {},", put2, "\n");
+    println("call2 = {}", call2, "\n");
+    println("put2 = {},", put2, "\n");
 
     // Problem 4.1
     double T=10;
@@ -73,16 +73,18 @@ int main() {
 
     int i = 0;
     while (i < T) {
-        bond_price += (c * exp(-r * T)) + exp(-r * T);
+        bond_price += c * exp(-r * (i+1));
         i++;
     }
+    bond_price += exp(-r * T);
     println("bond price (while loop) = {}", bond_price, "\n");
 
     // Problem 4.2
     double bond_price2 = 0; 
     int j; 
     for(j = 0; j < T; j++) {
-        bond_price2 += (c * exp(-r * T)) + exp(-r * T);
+        bond_price2 += c * exp(-r * (j+1));
     }
+    bond_price2 += exp(-r * T);
     println("bond price (for loop) = {}", bond_price2);
 }
