@@ -63,7 +63,7 @@ int main() {
     put2 = max((K - S), 0.0);
 
     println("call2 = {}", call2, "\n");
-    println("put2 = {},", put2, "\n");
+    println("put2 = {}", put2, "\n");
 
     // Problem 4.1
     double T=10;
