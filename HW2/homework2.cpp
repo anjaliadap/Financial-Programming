@@ -51,9 +51,9 @@ int main() {
     // Problem 3.3
     bool is_call=true;
 
-    if (is_call && (S > K)) {println("call value = {}", (S - K), "\n");}
-    else if (!is_call && (S < K)) {println("put value = {}", (K - S), "\n");}
-    else { println("The option value is {}", 0, "\n");}
+    if (is_call && (S > K)) {println("option = {}", (S - K), "\n");}
+    else if (!is_call && (S < K)) {println("option = {}", (K - S), "\n");}
+    else { println("option = {}", 0, "\n");}
     
     // Problem 3.4
     double call2;
