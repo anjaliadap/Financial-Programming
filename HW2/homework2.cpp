@@ -77,7 +77,7 @@ int main() {
         i++;
     }
     bond_price += exp(-r * T);
-    println("bond price (while loop) = {}", bond_price, "\n");
+    println("bond_price = {}", bond_price, "\n");
 
     // Problem 4.2
     double bond_price2 = 0; 
@@ -86,5 +86,5 @@ int main() {
         bond_price2 += c * exp(-r * (j+1));
     }
     bond_price2 += exp(-r * T);
-    println("bond price (for loop) = {}", bond_price2);
+    println("bond_price2 = {}", bond_price2);
 }
