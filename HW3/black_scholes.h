@@ -67,4 +67,37 @@ double bs_price(bool isCall, double K, double T,
 double bs_risk(bool isCall, double K, double T, 
                double S, double r, 
                double d, double sigma,
-               double &delta, double &gamma, double &vega, double &rho);
+               double &delta, double &gamma, double &vega, double &rho) {
+
+    // Discount factor and forward price
+    const double df   = discount(T, r);        // e^{-rT}
+    const double F    = forward(T, S, r, d);   // S e^{(r-d)T}
+    const double sqrtT = std::sqrt(T);
+
+    // d1, d2
+    const double x   = std::log(F / K);
+    const double ds  = sigma * sqrtT;
+    const double d2  = (x - 0.5 * ds * ds) / ds;
+    const double d1  = d2 + ds;
+
+    // Option price (reuse existing pricing function)
+    const double price = bs_price(isCall, K, T, df, F, sigma);
+
+    // Common multiplier for greeks
+    const double qdf = std::exp(-d * T); // dividend discount factor
+
+    if (isCall) {
+        delta = qdf * ndtr(d1);
+        gamma = qdf * nphi(d1) / (S * ds);
+        vega  = qdf * S * nphi(d1) * sqrtT;
+        rho   = K * df * T * ndtr(d2);
+    } else {
+        delta = qdf * (ndtr(d1) - 1.0);
+        gamma = qdf * nphi(d1) / (S * ds);
+        vega  = qdf * S * nphi(d1) * sqrtT;
+        rho   = -K * df * T * ndtr(-d2);
+    }
+
+    return price;
+
+}

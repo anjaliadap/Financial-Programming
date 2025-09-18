@@ -1,7 +1,6 @@
 #include <cmath>
-
+#include <algorithm>
 #include "discount.h"
-
 using namespace std;
 
 //
@@ -37,15 +36,19 @@ double bond_pv(double T,double coupon, double freq, double r) {
 //  the time to maturity T, and the frequency of payments freq
 //
 double swap_rate(double T, double freq,  double r) {
-    double DV01=0.0;
-    double dT=1.0/freq;
-    double t=0.0;
+    double DV01 = 0.0;
+    double dT = 1.0/freq;
+    double t = 0.0;
+
     while (t<T) {
-        double dt=min(dT,T-t);
-        double df=discount(t+dt,r);
-        DV01+=df*dt;
-        t+=dT;
+        double dt = min(dT,T-t);
+        double df = discount(t+dt,r);
+        DV01 += df * dt;
+        t += dT;
     }
-    double rate=(1.0-discount(T,r))/DV01;
+
+    double rate = (1.0-discount(T,r)) / DV01;
+ 
     return rate;
 }
+

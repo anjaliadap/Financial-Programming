@@ -7,6 +7,12 @@ static double ndtr(double z) {
     return 0.5*(1+std::erf(z/std::sqrt(2)));
 };
 
+// standard normal PDF φ(x)
+static double nphi(double x) {
+    static const double INV_SQRT_2PI = 0.3989422804014327; // 1 / sqrt(2π)
+    return INV_SQRT_2PI * std::exp(-0.5 * x * x);
+}
+
 double bs_price_fwd(bool is_call, double K, double T,
                     double F, double sigma) 
 {  
