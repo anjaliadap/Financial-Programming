@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "black_scholes.h"
 #include "discount.h"
+using namespace std;
 
 int main() {
     // Market inputs
@@ -27,12 +28,12 @@ int main() {
         double dv01 = -rho * 1e-4;
 
         // Print row as CSV
-        std::cout << std::fixed
-                  << std::setprecision(2) << K << ","
-                  << std::setprecision(2) << price << ","
-                  << delta << ","
-                  << gamma << ","
-                  << vega  << ","
+        std::cout << fixed
+                  << setprecision(2) << K << ", "
+                  << setprecision(2) << price << ", "
+                  << delta << ", "
+                  << gamma << ", "
+                  << vega  << ", "
                   << dv01  << "\n";
     }
 

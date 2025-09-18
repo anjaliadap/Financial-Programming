@@ -1,11 +1,12 @@
-y_1 = 47
-y_2 = 0.0018590641324997689
-y_3 = 31
-y_4 = -1.25
-call = 10
-put = 0
-option = 10
-call2 = 10
-put2 = 0
-bond_price = 1.0742329348357869
-bond_price2 = 1.0742329348357869
+
+g++ -std=c++23 discount.cpp test_discount.cpp -o test_discount.exe
+./test_discount
+./test_discount.exe > test_discount.txt
+
+g++ -std=c++23 test_bs_risk.cpp black_scholes.cpp discount.cpp forward.cpp -o test_bs_risk.exe
+./test_bs_risk
+./test_bs_risk.exe > test_bs_risk.txt
+
+g++ -std=c++23 fibonacci_recursive.cpp -o fibonacci_recursive.exe
+g++ -std=c++23 fibonacci.cpp -o fibonacci.exe
+
