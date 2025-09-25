@@ -6,7 +6,7 @@ int main() {
     double Ts[] = {1.0, 2.0, 5.0, 10, 30};
     double rs[] = {0.055, 0.0525, 0.05, 0.0475, 0.0450};
     
-    int tenors = sizeof(Ts); // compute tenors using sizeof operator (Problem 1.2)
+    int tenors = sizeof(Ts); 
     
     double freq = 1;
 
@@ -15,8 +15,8 @@ int main() {
     for (double T = 0.25; T <= 10; T += 0.25) {
     
         double R        = swap_rate(T, freq, tenors, Ts, rs);
-        double pv_swap  = swap_pv(true, R, T, freq, tenors, Ts, rs); // receiver
-        double pv_bond  = bond_pv(T, R, freq, tenors, Ts, rs);       // annual coupon = R
+        double pv_swap  = swap_pv(true, R, T, freq, tenors, Ts, rs); 
+        double pv_bond  = bond_pv(T, R, freq, tenors, Ts, rs);       
         
         cout << T << ", " << R << ", "<< pv_swap << ", " << pv_bond << endl;
     }

@@ -18,19 +18,16 @@ int main() {
     double sigmas[]={0.25,0.26,0.265};
     tenors = sizeof(Ts) / sizeof(Ts[0]);
 
-    // Allocate Space for the Greeks per option (Problem 3.1)
     double* value = new double[noptions];
     double* delta = new double[noptions];
     double* gamma = new double[noptions];
     double* vega  = new double[noptions];
     double* DV01  = new double[noptions];
 
-    // compute risk for each option (Problem 3.2)
     bs_risk_portfolio(noptions, units, is_call, K, T, S,
                       tenors, Ts, rs, ds, sigmas,
                       value, delta, gamma, vega, DV01);
 
-    // output greeks per option (Problem 3.3)
     cout << "notional, is_call, K, T, value, delta, gamma, vega, DV01\n";
 
     for (int i = 0; i < noptions; ++i) {
@@ -45,12 +42,10 @@ int main() {
             << DV01[i]  << '\n'; 
     }
 
-    // compute total results (Problem 3.4)
     double total_delta=0.0, total_gamma=0.0, total_vega=0.0, total_DV01=0.0;
     double total_value = total_risk(noptions, value, delta, gamma, vega, DV01,
                                   total_delta, total_gamma, total_vega, total_DV01);
 
-    // output total greeks (Problem 3.5)
     cout << "\nTotal Risk\n";
     cout << "value, delta, gamma, vega, DV01\n";
     cout << total_value << ", " << total_delta << ", " << total_gamma << ", "

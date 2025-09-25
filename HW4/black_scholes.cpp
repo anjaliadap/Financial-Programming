@@ -107,7 +107,6 @@ void bs_risk_portfolio(
                             tenors, Ts, rs, ds, sigmas,
                             d, g, v, dv);
 
-        // scale by position size
         value[i] = v0 * units[i];
         delta[i] = d  * units[i];
         gamma[i] = g  * units[i];
