@@ -101,11 +101,10 @@ void bs_risk_portfolio(
     double *value,
     double *delta, double *gamma, double *vega, double *DV01)
 {
+
     for (int i = 0; i < noptions; ++i) {
         double d=0.0, g=0.0, v=0.0, dv=0.0;
-        double v0 = bs_risk(is_call[i], K[i], T[i], S,
-                            tenors, Ts, rs, ds, sigmas,
-                            d, g, v, dv);
+        double v0 = bs_risk(is_call[i], K[i], T[i], S, tenors, Ts, rs, ds, sigmas, d, g, v, dv);
 
         value[i] = v0 * units[i];
         delta[i] = d  * units[i];

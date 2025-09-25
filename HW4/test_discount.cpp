@@ -2,7 +2,9 @@
 #include <iostream>
 #include "discount.h"
 using namespace std;
+
 int main() {
+
     double Ts[] = {1.0, 2.0, 5.0, 10, 30};
     double rs[] = {0.055, 0.0525, 0.05, 0.0475, 0.0450};
     
@@ -21,4 +23,5 @@ int main() {
         cout << T << ", " << R << ", "<< pv_swap << ", " << pv_bond << endl;
     }
 
-    return 0; }
+    return 0; 
+}
