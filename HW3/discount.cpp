@@ -55,7 +55,6 @@ double swap_pv(bool is_receiver, double R, double T, double freq,  double r){
 
     double pv = 0.0;
     double dT = 1.0 / freq; 
-    double sign = (is_receiver ? +1 : -1);
     double ti;
 
     // Number of whole intervals before T 
