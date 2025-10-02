@@ -59,24 +59,6 @@ double swap_rate(double T, double freq,
 double swap_pv(bool is_receiver,double R, double T, double freq, 
                int tenors, const double *Ts, const  double *rs);
 
-
-//
-// compute the present value of a swap
-// given:
-// Swap definition:
-//     <is_receiver>: true if receiver, false if payer
-//     <R>: swap rate
-//     <T>: time in years to maturity
-//     <freq>: coupon frequency in years
-// Discount curve definition:
-//     <tenors>:  size of <Ts> and <rs> arrays
-//     <Ts>: array expiry tenors in years.
-//           <Ts> must be sorted in ascending order
-//     <rs>: array of zero coupon rates for expiries <Ts>
-//
-double swap_pv(bool is_receiver,double R, double T, double freq, 
-               int tenors, const double *Ts, const double *rs);
-
 //
 // Bootstrap discount curve zero coupon rates from swap rates
 //
@@ -97,7 +79,7 @@ double swap_pv(bool is_receiver,double R, double T, double freq,
 // returns:
 //     0 if successful, non-zero if failed
 //
-int  swap_bootstrap(int tenors, const double *Ts, 
+int swap_bootstrap(int tenors, const double *Ts, 
                     const double *Rs, double freq, 
                     double * rs,
                     int max_iter=100, double tol=1e-8);

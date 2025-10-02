@@ -5,6 +5,7 @@
 #include "solve.h"
 
 #include <cmath>
+#include <iostream>
 
 
 double ndtr(double z) {
