@@ -12,8 +12,7 @@ int main() {
     double prices[tenors]={ 1.02, 1.05,1.01,0.99,0.98};
     double freq=1.0;
     
-    // Problem 1.3 Bootstrap discount curve
-    //             given inputs above
+    // Problem 1.3 Bootstrap discount curve given inputs above
 
     double rs[tenors] = {0.0, 0.0, 0.0, 0.0, 0.0};
     const int    max_iter = 200;
