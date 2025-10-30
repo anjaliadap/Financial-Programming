@@ -1,4 +1,3 @@
-// test_condition_number.cpp
 #include "cholesky.h"
 #include "Matrix.h"          // or "Matrix1.h"
 #include "VectorDouble.h"
