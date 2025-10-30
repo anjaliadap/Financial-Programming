@@ -1,13 +1,13 @@
 #pragma once
 #include <cmath>
 #include <format>
-#include <print>
 
 #include <exception>
 #include <stdexcept>
 
 
 #include "Matrix.h"
+#include "VectorDouble.h"
 
 
 // Compute the Cholesky decomposition of a positive-definite matrix A
