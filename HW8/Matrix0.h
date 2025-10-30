@@ -13,11 +13,11 @@ class Matrix {
         m_cols{cols},
         m_data(nullptr)
         {
-            std::cerr<<"Calling Matrix constructor\n";
+            //std::cerr<<"Calling Matrix constructor\n";
             m_data=new double[m_rows*m_cols];
         }
     ~Matrix() {
-        std::cerr<<"Calling Matrix destructor\n";
+        //std::cerr<<"Calling Matrix destructor\n";
         delete [] m_data;
     }
     size_t rows() const { return m_rows;  }

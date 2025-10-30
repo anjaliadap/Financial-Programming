@@ -3,7 +3,7 @@
 
 #include <format>
 #include <exception>
-#include <stdexcept>
+#include<stdexcept>
 
 VectorDouble Matrix::operator*(const VectorDouble &x) const {
         VectorDouble y(m_rows);

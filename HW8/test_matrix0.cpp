@@ -1,6 +1,5 @@
 #include "Matrix0.h"
-#include <iostream>
-using namespace std;
+#include <print>    
 
 int main() {
     Matrix A(2,3);
@@ -12,7 +11,7 @@ int main() {
         B=A;
         B[0,0]=-1.0;
 
-        std::cout<<A[0,0]<<endl;
-        std::cout<<B[0,0]<<endl;       
+        std::println("{}",A[0,0]);
+        std::println("{}",B[0,0]);       
     }
 }

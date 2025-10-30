@@ -5,12 +5,12 @@
 using namespace std;
 VectorDouble::VectorDouble(size_t size) : m_size(size)
 {
-    cerr << "\tcalling constructor..." << endl;
+    //cerr << "\tcalling constructor..." << endl;
     m_data = new double[size];
 }
 VectorDouble::~VectorDouble()
 {
-    cerr << "\tcalling destructor..." << endl;
+    //cerr << "\tcalling destructor..." << endl;
     delete[] m_data;
 }
 
@@ -41,7 +41,7 @@ const double &VectorDouble::operator[](size_t index) const {
 // Copy constructor and assignment operator
 VectorDouble::VectorDouble(const VectorDouble &vec):
     m_size(vec.size()) {
-    cerr << "\tcalling copy constructor..." << endl;
+    //cerr << "\tcalling copy constructor..." << endl;
     m_data = new double[m_size];
     for (size_t i1 = 0; i1 < m_size; i1++)
     {
@@ -51,7 +51,7 @@ VectorDouble::VectorDouble(const VectorDouble &vec):
 // Assigment Operator
 VectorDouble &VectorDouble::operator=(
               const VectorDouble &vec) {
-    cerr << "\tcalling assigment operator..." << endl;
+    //cerr << "\tcalling assigment operator..." << endl;
     if (&vec==this) return *this; // nothing to do
     delete[] m_data; // free all data;
     m_size = vec.size();
@@ -65,13 +65,13 @@ VectorDouble &VectorDouble::operator=(
 // move copy constructor and assigment operator
 VectorDouble::VectorDouble(VectorDouble &&vec): 
 m_size(vec.size()) {
-    cerr << "\tcalling move copy constructor..." << endl;
+    //cerr << "\tcalling move copy constructor..." << endl;
     m_data = vec.m_data; // point to m_data from vec
     vec.m_data=nullptr;  // vec now is empty
 }
 // Move Assigment Operator
 VectorDouble &VectorDouble::operator=(VectorDouble &&vec) {
-    cerr << "\tcalling move assigment operator..." << endl;
+    //cerr << "\tcalling move assigment operator..." << endl;
     delete[] m_data;
     m_data=vec.m_data;  // no copy of data
     vec.m_data=nullptr; // the destructor of vec
@@ -104,7 +104,7 @@ bool VectorDouble::operator==(const VectorDouble &vec) {
 // addition operator
 VectorDouble VectorDouble::operator+(const VectorDouble &vec) 
 const {
-    cerr << "\tcalling operator+..."<<endl;
+    //cerr << "\tcalling operator+..."<<endl;
     if (m_size != vec.size()) {
         throw runtime_error(
           "Vector.operator+: Sizes do not match.");
@@ -119,7 +119,7 @@ const {
 // substraction operator
 VectorDouble VectorDouble::operator-(const VectorDouble &vec) 
 const {
-    cerr << "\tcalling operator+..."<<endl;
+    //cerr << "\tcalling operator+..."<<endl;
     if (m_size != vec.size()) {
         throw runtime_error(
           "Vector.operator-: Sizes do not match.");
@@ -135,7 +135,7 @@ const {
 // increment operator
 VectorDouble &VectorDouble::operator+=(const VectorDouble &vec)
 {
-    cerr << "\tcalling operator+=..." << endl;
+    //cerr << "\tcalling operator+=..." << endl;
     if (m_size != vec.size()) {
         throw runtime_error(
           "Vector.operator+=: Sizes do not match.");
@@ -149,7 +149,7 @@ VectorDouble &VectorDouble::operator+=(const VectorDouble &vec)
 // decrement operator
 VectorDouble &VectorDouble::operator-=(const VectorDouble &vec)
 {
-    cerr << "\tcalling operator+=..." << endl;
+    //cerr << "\tcalling operator+=..." << endl;
     if (m_size != vec.size()) {
         throw runtime_error(
           "Vector.operator+=: Sizes do not match.");

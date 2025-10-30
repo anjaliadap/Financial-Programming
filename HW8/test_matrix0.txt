@@ -1,0 +1,10 @@
+-1
+-1
+
+// Explanation of Ouput-
+// Matrix class manages dynamic memory manually (via new/delete), so it must 
+// correctly handle deep copies. Without a user-defined copy constructor and 
+// copy assignment operator, the compiler-generated versions perform a shallow 
+// copy of the pointer 'm_data', causing two Matrix objects to share the same 
+// memory. When one object is destroyed, the other is left with a dangling 
+// pointer, leading to undefined behavior or incorrect results.

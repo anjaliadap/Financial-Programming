@@ -4,24 +4,24 @@
 using namespace std;
 
 VectorInt::VectorInt(size_t size) : m_size(size) {
-    cerr << "\tcalling constructor..." << endl;
+    //cerr << "\tcalling constructor..." << endl;
     m_data = new int[m_size];
 }
 
 VectorInt::~VectorInt() {
-    cerr << "\tcalling destructor..." << endl;
+    //cerr << "\tcalling destructor..." << endl;
     delete[] m_data;
 }
 
 VectorInt::VectorInt(const VectorInt &vec) : m_size(vec.m_size) {
-    cerr << "\tcalling copy constructor..." << endl;
+    //cerr << "\tcalling copy constructor..." << endl;
     m_data = new int[m_size];
     for (size_t i = 0; i < m_size; i++)
         m_data[i] = vec.m_data[i];
 }
 
 VectorInt &VectorInt::operator=(const VectorInt &vec) {
-    cerr << "\tcalling copy assignment..." << endl;
+    //cerr << "\tcalling copy assignment..." << endl;
     if (this == &vec) return *this;
     delete[] m_data;
     m_size = vec.m_size;
@@ -32,13 +32,13 @@ VectorInt &VectorInt::operator=(const VectorInt &vec) {
 }
 
 VectorInt::VectorInt(VectorInt &&vec) : m_size(vec.m_size), m_data(vec.m_data) {
-    cerr << "\tcalling move constructor..." << endl;
+    //cerr << "\tcalling move constructor..." << endl;
     vec.m_data = nullptr;
     vec.m_size = 0;
 }
 
 VectorInt &VectorInt::operator=(VectorInt &&vec) {
-    cerr << "\tcalling move assignment..." << endl;
+    //cerr << "\tcalling move assignment..." << endl;
     if (this == &vec) return *this;
     delete[] m_data;
     m_size = vec.m_size;

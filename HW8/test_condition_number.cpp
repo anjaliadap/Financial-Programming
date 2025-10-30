@@ -1,51 +1,46 @@
-#include <cmath>
-#include <iomanip>
-#include <iostream>
-
-#include "Matrix.h"
-#include "VectorDouble.h"
+// test_condition_number.cpp
 #include "cholesky.h"
-
-static double kappa_corr_2x2(double rho) {
-    return (1.0 + rho) / (1.0 - rho);
-}
-
-static double norm2(const VectorDouble &v) {
-    double s = 0.0;
-    for (std::size_t i = 0; i < v.size(); ++i)
-        s += v[i] * v[i];
-    return std::sqrt(s);
-}
+#include "Matrix.h"          // or "Matrix1.h"
+#include "VectorDouble.h"
+#include <iostream>
+#include <cmath>
 
 int main() {
-    const double eps = 0.01;
-    const double rhos[] = {0.9, 0.99, 0.999, 0.9999};
+    std::cout << "rho,kappa,max_error,actual_error\n";
 
-    std::cout << std::fixed << std::setprecision(8);
-    std::cout << "rho, kappa, max_error_bound, actual_error\n";
+    double eps = 0.01;
+    double rhos[] = {0.9, 0.99, 0.999, 0.9999};
 
     for (double rho : rhos) {
+        // Build correlation matrix
         Matrix C(2, 2);
-        C(0,0) = 1.0;  C(0,1) = rho;
-        C(1,0) = rho;  C(1,1) = 1.0;
+        C[0,0] = 1.0;   C[0,1] = rho;
+        C[1,0] = rho;   C[1,1] = 1.0;
 
-        VectorDouble b(2), bp(2);
-        b[0]  = 0.5;        b[1]  = 0.5;
-        bp[0] = 0.5 + eps;  bp[1] = 0.5;
+        // Define right-hand sides
+        VectorDouble b(2);
+        b[0] = 0.5; b[1] = 0.5;
 
+        VectorDouble b2(2);
+        b2[0] = 0.5 + eps; b2[1] = 0.5;
+
+        // Compute Cholesky factorization
         Matrix L = cholesky_decomposition(C);
+
+        // Solve systems
         VectorDouble w  = solve_cholesky(L, b);
-        VectorDouble wp = solve_cholesky(L, bp);
+        VectorDouble w2 = solve_cholesky(L, b2);
 
-        VectorDouble diff = wp - w;
-        double actual_error = std::sqrt(2.0) * norm2(diff); // ✅ fixed
-        double kappa = kappa_corr_2x2(rho);
-        double max_error_bound = kappa * eps;
+        // Compute condition number and errors
+        double kappa = (1 + rho) / (1 - rho);
+        double max_error = kappa * eps;
+        double actual_error = std::sqrt(
+            (w[0]-w2[0])*(w[0]-w2[0]) +
+            (w[1]-w2[1])*(w[1]-w2[1])
+        );
 
-        std::cout << rho << ", "
-                  << kappa << ", "
-                  << max_error_bound << ", "
-                  << actual_error << "\n";
+        std::cout << rho << "," << kappa << ","
+                  << max_error << "," << actual_error << "\n";
     }
 
     return 0;
