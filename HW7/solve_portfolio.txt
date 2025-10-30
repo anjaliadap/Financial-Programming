@@ -1,0 +1,4 @@
+Option notionals (weights):
+	1.515
+	2.424
+	-1.212

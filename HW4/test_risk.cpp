@@ -8,13 +8,13 @@ int main() {
     bool is_call[]={true,false,true,false};
     double K[]={110,90,120,80};
     double T[]={1.0,1.0,1.5,1.5};
-    int noptions = sizeof(units) / sizeof(units[0]);
+    int noptions = sizeof(units) / sizeof(units[0]); // sizeof returns bytes 
 
     double S=100.0;
     double tenors;
     double Ts[]={1.0,2.0,5.0};  
-    double rs[]={0.055,0.0525,0.05};
-    double ds[]={0.0125,0.015,0.0175};
+    double rs[]={0.055,0.0525,0.05}; // zero-rates for each maturity 
+    double ds[]={0.0125,0.015,0.0175}; // dividend yields for different maturities used to calculate forward prices 
     double sigmas[]={0.25,0.26,0.265};
     tenors = sizeof(Ts) / sizeof(Ts[0]);
 
@@ -26,7 +26,7 @@ int main() {
 
     bs_risk_portfolio(noptions, units, is_call, K, T, S,
                       tenors, Ts, rs, ds, sigmas,
-                      value, delta, gamma, vega, DV01);
+                      value, delta, gamma, vega, DV01); // passed by reference 
 
     cout << "notional, is_call, K, T, value, delta, gamma, vega, DV01\n";
 

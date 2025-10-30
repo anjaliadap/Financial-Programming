@@ -4,33 +4,33 @@
 using  namespace std;
 
 // Function for discount factor
-double discount(double t
-                , int tenors // Total time to maturity - size of Ts and rs 
+double discount(double t // ANY t - not just what is in the Ts 
+                , int tenors // length of time to maturity and rates array - size of Ts and rs 
                 , const double *Ts // 0.5, 1.0, 1.5, ...
                 , const double *rs) { // zero rates 
 
     int index=0;
 
-    while (index<tenors && Ts[index]<t) {
-        index++;
+    while (index<tenors && Ts[index]<t) { // find the index of the maturity T that is less than t
+        index++; 
     }
 
     double r;
 
-    if (index==0) {  // t<Ts[0] flat extrapolation
-        r=rs[0];
-    } else if (index==tenors) { // t>Ts[tenors-1] 
+    if (index==0) {  // t<Ts[0] flat extrapolation - set yield to first element
+        r=rs[0]; // 
+    } else if (index==tenors) { // t>Ts[tenors-1] - set yield to last element 
         r=rs[tenors-1];
-    } else {;        // Ts[index-1]<t<Ts[index] 
-        double r1=rs[index];
+    } else {;        // Ts[index-1]<t<Ts[index] - interpolate if t is in between two Ts 
+        double r1=rs[index]; // index = RHS index 
         double t1=Ts[index];
-        int index0=index-1;
+        int index0=index-1; // LHS index 
         double t0=Ts[index0];
-        double r0=rs[index-1];
+        double r0=rs[index0];
     
         double dt=t-t0;
         double dr=r1-r0;
-        r=r0+dr*dt/(t1-t0);//linear interpolation
+        r=r0+dr*dt/(t1-t0); //linear interpolation
     }
     return exp(-r*t);
 }
@@ -48,7 +48,7 @@ double bond_pv(double T
     double t=0.0;
 
     while (t<T) {
-        double dt=min(dT,T-t);
+        double dt=min(dT,T-t); // last stub payment 
         double df=discount(t+dt, tenors, Ts, rs);
         price+=coupon*df*dt;
         t+=dT;
@@ -80,7 +80,6 @@ double swap_rate(double T
     double rate=(1.0-discount(T,tenors,Ts,rs))/DV01;
     
     return rate;
-
 }
 
 double swap_pv(bool is_receiver
@@ -97,7 +96,7 @@ double swap_pv(bool is_receiver
 
     while (t<T) {
         double dt=min(dT,T-t);
-        double df=discount(t+dt,tenors,Ts,rs);
+        double df=discount(t+dt,tenors,Ts,rs); // get the interpolated rate for each t+dt
         price+=R*df*dt;
         t+=dT;
     }
@@ -125,6 +124,8 @@ double swap_function(double r
     return swap_rate(Ts[T_i],freq,tenors,Ts,rs)-R;
 }
 
+
+// params implementation 
 int  swap_bootstrap(int tenors
                     , const double *Ts
                     , const double *Rs
@@ -214,8 +215,8 @@ int bond_bootstrap(int tenors           // length of Ts and rs
                    , double tol)
 {
     int size = 4 + 2 * tenors;
-    double *params = new double[size];
 
+    double *params = new double[size];
     params[0] = 0.0;        // index (set inside loop)
     params[1] = 0.0;        // coupon (set inside loop)
     params[2] = 0.0;        // price  (set inside loop)
@@ -245,11 +246,15 @@ int bond_bootstrap(int tenors           // length of Ts and rs
         double x_init = (index > 0 ? rs[index - 1] : coupons[index]);
 
         double r_sol = 0.0;
-        int status = solve_bisection(
-            x_init, x0, x1,
-            bond_function, size, params,
-            max_iter, tol, r_sol
-        );
+        int status = solve_bisection(x_init
+                                    , x0
+                                    , x1
+                                    , bond_function
+                                    , size
+                                    , params 
+                                    , max_iter
+                                    , tol
+                                    , r_sol);
 
         if (status != 0) {
             delete[] params;

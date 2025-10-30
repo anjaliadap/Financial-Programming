@@ -1,0 +1,16 @@
+cd "C:\Users\anjal\Desktop\Fall 2025\Financial Programming\Homework\Financial-Programming\HW5"
+
+g++ -std=c++23 test_bond_bootstrap.cpp discount.cpp solve.cpp -o test_bond_bootstrap.exe
+
+./test_bond_bootstrap
+
+./test_bond_bootstrap > test_bond_bootstrap.csv
+
+
+
+
+# Compile
+g++ -std=c++23 test_vol_bootstrap.cpp discount.cpp forward.cpp volatility.cpp black_scholes.cpp solve.cpp -o test_vol_bootstrap.exe
+
+# Run and redirect stdout to CSV
+./test_vol_bootstrap > test_vol_bootstrap.csv

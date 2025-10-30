@@ -14,7 +14,7 @@ int main() {
     
     // Problem 1.3 Bootstrap discount curve given inputs above
 
-    double rs[tenors] = {0.0, 0.0, 0.0, 0.0, 0.0};
+    double rs[tenors] = {0.0, 0.0, 0.0, 0.0, 0.0}; 
     const int    max_iter = 200;
     const double tol      = 1e-10;
 

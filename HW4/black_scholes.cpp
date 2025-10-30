@@ -21,51 +21,76 @@ double ndtr(double z) {
 // <sigma> underlying's  volatility
 // returns forwarded (undiscounted)  option's price
 //
+double bs_price_fwd(bool is_call
+                    , double K
+                    , double T
+                    , double F
+                    , double sigma) {  
 
-
-double bs_price_fwd(bool is_call, double K, double T,
-                    double F, double sigma) {  
     double ds=std::max(0.000001,sigma*std::sqrt(T));
     double dsig=0.5*ds*ds;
     double d2=(log(F/K)-dsig)/ds;
     double d1=d2+ds;
+
     double opt;
     if (is_call)
         opt= F*ndtr(d1) - K*ndtr(d2);
     else
         opt= K*ndtr(-d2) - F*ndtr(-d1);
+
     return opt;
 }
 
-double bs_price(bool is_call,  double K, double T, 
-                     double df, double F, double sigma) {
-    return df*bs_price_fwd(is_call,K,T,F,sigma);
+double bs_price(bool is_call
+                , double K
+                , double T
+                , double df
+                , double F
+                , double sigma) {
+
+    return df*bs_price_fwd(is_call,K,T,F,sigma); // forward price discounted back
 }
 
-double bs_price(bool is_call, double K, double T, 
-            double S,
-            int tenors, const double *Ts, const double *rs, 
-            const double *ds, const double *sigmas) {
+// implements bs_price_fwd and bs_price together
+double bs_price(bool is_call
+                , double K
+                , double T
+                , double S
+                , int tenors
+                , const double *Ts
+                , const double *rs 
+                , const double *ds
+                , const double *sigmas) {
                 
-    double df=discount(T,tenors,Ts, rs);
+    double df=discount(T,tenors,Ts, rs); // interpolated discount rate for t 
     double F=forward(T, S, tenors, Ts, rs, ds);
     double sigma=volatility(T, tenors, Ts, sigmas);
 
     return bs_price(is_call,K,T,df,F,sigma);
 }
 
-double bs_risk(bool is_call, double K, double T, double S, int tenors, const double *Ts,const double *rs, 
-    const double *ds, const double *sigmas, double &delta, double &gamma, double &vega, double &DV01) {
+double bs_risk(bool is_call
+               , double K
+               , double T
+               , double S
+               , int tenors
+               , const double *Ts
+               , const double *rs
+               , const double *ds
+               , const double *sigmas
+               , double &delta // with ampersand, dereference variable inside the function 
+               , double &gamma
+               , double &vega
+               , double &DV01) {
 
     double df    = discount(T, tenors, Ts, rs);
     double F     = forward (T, S, tenors, Ts, rs, ds);
     double sigma = volatility(T, tenors, Ts, sigmas);
-    double V0    = bs_price(is_call, K, T, df, F, sigma);
+    double V0    = bs_price(is_call, K, T, df, F, sigma); // F is forward price at expiry T 
 
     double dS  = 0.01 * S;                  
     double Sup = S + dS;
     double Sdn = S - dS; 
-
     double Fp = forward(T, Sup, tenors, Ts, rs, ds); // F+
     double Fm = forward(T, Sdn, tenors, Ts, rs, ds); // F-
 
@@ -85,21 +110,26 @@ double bs_risk(bool is_call, double K, double T, double S, int tenors, const dou
     double V_up_r = bs_price(is_call, K, T, dfr, Fr, sigma);
     DV01 = V_up_r - V0;  
 
-    return V0;
+    return V0; // returns black scholes price for a single option 
 
 }
 
-void bs_risk_portfolio(
-    int noptions,
-    const int *units,
-    const bool *is_call,
-    const double *K,
-    const double *T,
-    double S,
-    int tenors, const double *Ts,const double *rs,
-    const double *ds, const double *sigmas,
-    double *value,
-    double *delta, double *gamma, double *vega, double *DV01)
+void bs_risk_portfolio(int noptions
+                        , const int *units
+                        , const bool *is_call
+                        , const double *K
+                        , const double *T
+                        , double S
+                        , int tenors
+                        , const double *Ts
+                        , const double *rs
+                        , const double *ds
+                        , const double *sigmas
+                        , double *value
+                        , double *delta
+                        , double *gamma
+                        , double *vega
+                        , double *DV01)
 {
 
     for (int i = 0; i < noptions; ++i) {
