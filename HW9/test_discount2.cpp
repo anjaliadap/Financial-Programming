@@ -14,18 +14,14 @@ int main() {
     file.close();
 
     Date val_date = usd_curve.valuation_date();
-    std::cout << "Valuation Date: " << val_date << "\n";
-    std::cout << "Date          T(yrs)     Discount\n";
-    std::cout << "----------------------------------\n";
+    std::cout << "valuation_date," << val_date << "\n";
+    std::cout << "date,rate\n";
 
     for (int i = 0; i <= 40; ++i) { // every 90 days for 10 years
         Date d = val_date + 90.0 * i;
         double T = (d - val_date) / 365.0;
         double df = usd_curve.discount(d);
-        std::cout << d << "  "
-                  << std::setw(8) << std::fixed << std::setprecision(3) << T
-                  << "  " << std::setw(10) << std::setprecision(6) << df
-                  << "\n";
+        std::cout << d << "," << std::fixed << std::setprecision(6) << df << "\n";
     }
 
     return 0;
